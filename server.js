@@ -58,15 +58,13 @@ app.post('/actors', async (req, res) => {
         return res.status(400).send('Date of birth cannot be in the future');
     }
 
-    try {
-        const result = await queryDB(
-            'INSERT INTO actors (first_name, last_name, date_of_birth) VALUES ($1, $2, $3) RETURNING *',
-            [firstName, lastName, dateOfBirth]
-        );
-        res.status(201).json(result[0]);
-    } catch (err) {
-        res.status(500).send('Error creating actor');
-    }
+    
+    const result = await queryDB(
+        'INSERT INTO actors (first_name, last_name, date_of_birth) VALUES ($1, $2, $3) RETURNING *',
+        [firstName, lastName, dateOfBirth]
+    );
+    res.status(201).json(result[0]);
+    
 });
 
 // Update an actor
