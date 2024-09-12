@@ -11,6 +11,28 @@
 			"item": [
 				{
 					"name": "Cannot create actor which has future birth date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -39,6 +61,29 @@
 				},
 				{
 					"name": "Create Actor Successfull call",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json()\r",
+									"\r",
+									"pm.collectionVariables.set(\"actorId\", responseJson.id)\r",
+									"\r",
+									"// Check that first_name is jaunius and last_name is pinelis\r",
+									"pm.test(\"Check that first and last names are correct\", function () {\r",
+									"     var responseObject = pm.response.json();\r",
+									"\r",
+									"     pm.expect(responseObject).to.be.an('object');\r",
+									"     pm.expect(responseObject.first_name).to.eq(\"Jaunius\");\r",
+									"     pm.expect(responseObject.last_name).to.eq('Pinelis');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -71,7 +116,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/actors/4",
+							"raw": "http://localhost:3000/actors/{{actorId}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -79,7 +124,7 @@
 							"port": "3000",
 							"path": [
 								"actors",
-								"4"
+								"{{actorId}}"
 							]
 						}
 					},
@@ -91,14 +136,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/actors",
+							"raw": "http://localhost:3000/actors/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"actors"
+								"actors",
+								""
 							]
 						}
 					},
@@ -163,7 +209,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/actors/100000",
+							"raw": "http://localhost:3000/actors/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -171,7 +217,7 @@
 							"port": "3000",
 							"path": [
 								"actors",
-								"100000"
+								"7"
 							]
 						}
 					},
@@ -183,7 +229,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/actors/4",
+							"raw": "http://localhost:3000/actors/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -191,7 +237,7 @@
 							"port": "3000",
 							"path": [
 								"actors",
-								"4"
+								"7"
 							]
 						}
 					},
@@ -236,6 +282,35 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "actorId",
+			"value": "4",
+			"type": "string"
 		}
 	]
 }
