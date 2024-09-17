@@ -117,8 +117,11 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"packages": {},
-								"type": "text/javascript"
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -127,7 +130,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"gffdgfd\", \r\n    \"lastName\": \"fdsfdsfds\", \r\n    \"dateOfBirth\": \"1990-01-14\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"gffdgfd\", \r\n    \"lastName\": \"fdsfdsfds\", \r\n    \"dateOfBirth\": \"1990-02-14\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
